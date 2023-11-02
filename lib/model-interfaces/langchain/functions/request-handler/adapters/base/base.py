@@ -168,6 +168,7 @@ class ModelAdapter:
         logger.debug(f"run with {kwargs}")
         logger.debug(f"workspace_id {workspace_id}")
         logger.debug(f"mode: {self._mode}")
+        logger.debug(f"prompt_template: {prompt_template}")
 
         if self._mode == ChatbotMode.CHAIN.value:
             return self.run_with_chain(prompt, workspace_id, prompt_template)
