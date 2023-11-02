@@ -36,15 +36,16 @@ class BedrockClaudeAdapter(ModelAdapter):
         return PromptTemplate(template=template, input_variables=["context", "question"])
 
     def get_qa_prompt(self):
-        template = """
+        template = "the wrong prompt template is getting through"
+#         template = """
 
-Human: Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
+# Human: Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
 
-{context}
+# {context}
 
-Question: {question}
+# Question: {question}
 
-Assistant:"""
+# Assistant:"""
 
         return PromptTemplate(
             template=template, input_variables=["context", "question"]
