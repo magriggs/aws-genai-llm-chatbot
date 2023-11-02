@@ -98,6 +98,8 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
   const [imageDialogVisible, setImageDialogVisible] = useState(false);
   const [files, setFiles] = useState<ImageFile[]>([]);
   const [socketUrl, setSocketUrl] = useState<string | null>(null);
+  const [promptTextAreaValue, setPromptTextAreaValue] = useState(""); // Add state for the new TextAreaAutoSize
+
   const { sendJsonMessage, readyState } = useWebSocket(socketUrl, {
     share: true,
     shouldReconnect: () => true,
@@ -266,12 +268,14 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
     );
 
     const value = state.value.trim();
+    const promptValue = promptTextAreaValue.trim();
     const request: ChatBotRunRequest = {
       action: ChatBotAction.Run,
       modelInterface: state.selectedModelMetadata!.interface,
       data: {
         mode: ChatBotMode.Chain,
         text: value,
+        prompt: promptValue,
         files: props.configuration.files || [],
         modelName: name,
         provider: provider,
@@ -389,6 +393,20 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
               configuration={props.configuration}
               setConfiguration={props.setConfiguration}
             />
+ {/* MG changes start */}
+
+          <TextareaAutosize
+            className={styles.input_textarea} // Adjust the class name or styles as needed
+            maxRows={3}
+            minRows={1}
+            spellCheck={false}
+            onChange={(e) => setPromptTextAreaValue(e.target.value)} // Update the state with the new textarea value
+            value={promptTextAreaValue}
+            placeholder="New Text Area"
+          />
+
+{/* MG changes end */}
+
           <TextareaAutosize
             className={styles.input_textarea}
             maxRows={6}

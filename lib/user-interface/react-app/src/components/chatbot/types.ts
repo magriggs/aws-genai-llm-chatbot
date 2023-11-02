@@ -68,6 +68,7 @@ export interface ChatBotRunRequest {
     sessionId?: string;
     files: ImageFile[] | null;
     text: string;
+    prompt: string;
     mode: string;
     workspaceId?: string;
     modelKwargs?: Record<string, string | boolean | number>;
