@@ -204,6 +204,7 @@ export default function MultiChat() {
             topP: chatSession.configuration.topP,
           },
           text: value,
+          prompt: "",
           mode: ChatBotMode.Chain,
         },
       };
