@@ -32,6 +32,9 @@ class BedrockClaudeAdapter(ModelAdapter):
             callbacks=[self.callback_handler],
         )
 
+    def get_qa_prompt_with_template(self, template):
+        return PromptTemplate(template=template, input_variables=["context", "question"])
+
     def get_qa_prompt(self):
         template = """
 

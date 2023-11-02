@@ -88,8 +88,11 @@ class ModelAdapter:
 
     def get_qa_prompt(self):
         return QA_PROMPT
+    
+    def get_qa_prompt_with_template(self, template):
+        return self.get_qa_prompt()
 
-    def run_with_chain(self, user_prompt, workspace_id=None):
+    def run_with_chain(self, user_prompt, workspace_id=None, prompt_template=None):
         if not self.llm:
             raise ValueError("llm must be set")
 
@@ -161,12 +164,12 @@ class ModelAdapter:
             "metadata": metadata,
         }
 
-    def run(self, prompt, workspace_id=None, *args, **kwargs):
+    def run(self, prompt, workspace_id=None, prompt_template=None, *args, **kwargs):
         logger.debug(f"run with {kwargs}")
         logger.debug(f"workspace_id {workspace_id}")
         logger.debug(f"mode: {self._mode}")
 
         if self._mode == ChatbotMode.CHAIN.value:
-            return self.run_with_chain(prompt, workspace_id)
+            return self.run_with_chain(prompt, workspace_id, prompt_template)
 
         raise ValueError(f"unknown mode {self._mode}")

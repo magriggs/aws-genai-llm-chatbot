@@ -72,6 +72,7 @@ def handle_run(record):
     model_id = data["modelName"]
     mode = data["mode"]
     prompt = data["text"]
+    prompt_template = data["prompt"]
     workspace_id = data.get("workspaceId", None)
     session_id = data.get("sessionId")
 
@@ -89,12 +90,13 @@ def handle_run(record):
         mode=mode,
         session_id=session_id,
         user_id=user_id,
-        model_kwargs=data.get("modelKwargs", {}),
+        model_kwargs=data.get("modelKwargs", {}),        
     )
 
     response = model.run(
         prompt=prompt,
         workspace_id=workspace_id,
+        prompt_template = prompt_template,
     )
 
     logger.info(response)

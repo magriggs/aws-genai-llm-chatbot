@@ -402,7 +402,7 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
             spellCheck={false}
             onChange={(e) => setPromptTextAreaValue(e.target.value)} // Update the state with the new textarea value
             value={promptTextAreaValue}
-            placeholder="New Text Area"
+            placeholder="Prompt"
           />
 
 {/* MG changes end */}
