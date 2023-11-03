@@ -67,15 +67,6 @@ class ModelAdapter:
         )
 
     def get_prompt(self, template):
-        return self.get_prompt()
-
-    def get_prompt(self):
-        template = """The following is a friendly conversation between a human and an AI. If the AI does not know the answer to a question, it truthfully says it does not know.
-
-        Current conversation:
-        {chat_history}
-
-        Question: {input}"""
         input_variables = ["input", "chat_history"]
         prompt_template_args = {
             "chat_history": "{chat_history}",
@@ -85,6 +76,16 @@ class ModelAdapter:
         prompt_template = PromptTemplate(**prompt_template_args)
 
         return prompt_template
+
+
+    def get_prompt(self):
+        template = """The following is a friendly conversation between a human and an AI. If the AI does not know the answer to a question, it truthfully says it does not know.
+
+        Current conversation:
+        {chat_history}
+
+        Question: {input}"""
+        return self.get_prompt(template)
 
     def get_condense_question_prompt(self):
         return CONDENSE_QUESTION_PROMPT
