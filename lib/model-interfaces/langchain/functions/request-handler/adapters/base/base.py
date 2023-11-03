@@ -66,7 +66,7 @@ class ModelAdapter:
             output_key=output_key,
         )
 
-    def get_prompt_with_template(self, template):
+    def get_prompt(self, template):
         return self.get_prompt()
 
     def get_prompt(self):
@@ -92,7 +92,7 @@ class ModelAdapter:
     def get_qa_prompt(self):
         return QA_PROMPT
     
-    def get_qa_prompt_with_template(self, template):
+    def get_qa_prompt(self, template):
         return self.get_qa_prompt()
 
     def run_with_chain(self, user_prompt, workspace_id=None, prompt_template=None):
@@ -104,7 +104,7 @@ class ModelAdapter:
                 self.llm,
                 WorkspaceRetriever(workspace_id=workspace_id),
                 condense_question_prompt=self.get_condense_question_prompt(),
-                combine_docs_chain_kwargs={"prompt": self.get_qa_prompt()},
+                combine_docs_chain_kwargs={"prompt": self.get_qa_prompt(prompt_template)},
                 return_source_documents=True,
                 memory=self.get_memory(output_key="answer"),
                 verbose=True,
