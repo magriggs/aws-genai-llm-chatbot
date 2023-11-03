@@ -118,6 +118,7 @@ def record_handler(record: SQSRecord):
     payload: str = record.body
     message: dict = json.loads(payload)
     detail: dict = json.loads(message["Message"])
+    logger.info(f"langchain handle_run()")
     logger.info(detail)
 
     if detail["action"] == ChatbotAction.RUN.value:

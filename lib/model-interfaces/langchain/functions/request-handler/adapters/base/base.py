@@ -66,6 +66,9 @@ class ModelAdapter:
             output_key=output_key,
         )
 
+    def get_prompt_with_template(self, template):
+        return self.get_prompt()
+
     def get_prompt(self):
         template = """The following is a friendly conversation between a human and an AI. If the AI does not know the answer to a question, it truthfully says it does not know.
 
