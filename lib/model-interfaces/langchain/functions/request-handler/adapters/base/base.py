@@ -66,7 +66,16 @@ class ModelAdapter:
             output_key=output_key,
         )
 
-    def get_prompt(self, template):
+    def get_prompt(self, template=None):
+        if template == None:
+            template = """The following is a friendly conversation between a human and an AI. If the AI does not know the answer to a question, it truthfully says it does not know.
+
+        Current conversation:
+        {chat_history}
+
+        Question: {input}"""
+
+
         input_variables = ["input", "chat_history"]
         prompt_template_args = {
             "chat_history": "{chat_history}",
@@ -77,24 +86,11 @@ class ModelAdapter:
 
         return prompt_template
 
-
-    def get_prompt(self):
-        template = """The following is a friendly conversation between a human and an AI. If the AI does not know the answer to a question, it truthfully says it does not know.
-
-        Current conversation:
-        {chat_history}
-
-        Question: {input}"""
-        return self.get_prompt(template)
-
     def get_condense_question_prompt(self):
         return CONDENSE_QUESTION_PROMPT
 
-    def get_qa_prompt(self):
-        return QA_PROMPT
-    
-    def get_qa_prompt(self, template):
-        return self.get_qa_prompt()
+    def get_qa_prompt(self, template=None):
+        return QA_PROMPT        
 
     def run_with_chain(self, user_prompt, workspace_id=None, prompt_template=None):
         if not self.llm:

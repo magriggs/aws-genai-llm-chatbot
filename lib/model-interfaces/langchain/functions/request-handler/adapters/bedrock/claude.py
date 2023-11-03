@@ -37,33 +37,19 @@ class BedrockClaudeAdapter(ModelAdapter):
             template = """
 
 # Human: Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
-
 # {context}
-
 # Question: {question}
-
 # Assistant:"""
-
         return PromptTemplate(template=template, input_variables=["context", "question"])
 
-    # def get_qa_prompt(self):
-    #     return self.get_qa_prompt
-        #template = "the wrong prompt template is getting through"
-#         template = """
+    def get_prompt(self, template=None):
+        if template == None:
+            template = """
 
 # Human: Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
-
 # {context}
-
 # Question: {question}
-
 # Assistant:"""
-
-        # return PromptTemplate(
-        #     template=template, input_variables=["context", "question"]
-        # )
-
-    def get_prompt(self, template):
 
         input_variables = ["input", "chat_history"]
         prompt_template_args = {
@@ -74,20 +60,6 @@ class BedrockClaudeAdapter(ModelAdapter):
         prompt_template = PromptTemplate(**prompt_template_args)
 
         return prompt_template
-
-    def get_prompt(self):
-        template = """
-
-Human: The following is a friendly conversation between a human and an AI. If the AI does not know the answer to a question, it truthfully says it does not know.
-
-Current conversation:
-{chat_history}
-
-Question: {input}
-
-Assistant:"""
-        return self.get_prompt(template)
-
 
     def get_condense_question_prompt(self):
         template = """
