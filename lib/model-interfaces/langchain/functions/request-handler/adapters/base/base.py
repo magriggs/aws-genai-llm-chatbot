@@ -142,7 +142,7 @@ class ModelAdapter:
 
         conversation = ConversationChain(
             llm=self.llm,
-            prompt=self.get_prompt(),
+            prompt=self.get_prompt(prompt_template),
             memory=self.get_memory(),
             verbose=True,
         )
